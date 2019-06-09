@@ -1,6 +1,6 @@
 var triviaQuestions = [{
-	question: "Cruella de Vil is the villain in which Disney movie?",
-	answerList: ["Aristo Cats", "101 Dalmatian", "Alice in Wonderland", "Moana"],
+	question: "What was the name of Hercules's horse?",
+	answerList: ["Mustang", "Pegasus", "Abraxan", "Granian"],
 	answer: 1
 },{
 	question: "What is the name of the boy who owns Buzz Lightyear in the movie Toy Story?",
@@ -15,8 +15,8 @@ var triviaQuestions = [{
 	answerList: ["Jessie", "Repunzel", "Merida", "Elsa"],
 	answer: 2
 },{
-	question: "In the movie Finding Nemo, which country has Nemo been taken to?",
-	answerList: ["England", "Bahamas", "Australia", "Atlantis"],
+	question: "In Lady and the Tramp Jim Dear gives his wife Darling, Lady as a gift for?",
+	answerList: ["Birthday", "Anniversary", "Valentine's Day", "Christmas"],
 	answer: 3
 },{
 	question: "What is the name of Bambi's rabbit friend?",
@@ -35,8 +35,8 @@ var triviaQuestions = [{
 	answerList: ["Milan", "Rome", "Paris", "Cannes"],
 	answer: 2
 },{
-	question: "Which Disney character started life as Steamboat Willie??",
-	answerList: ["Pluto", "Donald Duck", "Goofy", "Mickey Mouse"],
+	question: "What instrument did the crocodile in The Princess and the Frog play?",
+	answerList: ["Violin", "French Horn", "Piano", "Trumpet"],
 	answer: 3
 },{
 	question: "What is Cinderella's slipper made of?",
@@ -60,13 +60,13 @@ var triviaQuestions = [{
 	answer: 3
 }];
 
-var gifArray = ['question1', 'question2', 'question3', 'question4', 'question5', 'question6', 'question7', 'question8', 'question9', 'question10', 'question11', 'question12', 'question13','genie','question15'];
+var gifArray = ['peg', 'toy', 'rac', 'question4', 'pup', 'bambi', 'pumpkin', 'beauty', 'rat2', 'alligator', 'glass', 'tiger', 'boo','genie','poc'];
 var currentQuestion; var correctAnswer; var incorrectAnswer; var unanswered; var seconds; var time; var answered; var userSelect;
 var messages = {
-	correct: "Yes, that's right!",
-	incorrect: "No, that's not it.",
+	correct: "Nice job, you got it!",
+	incorrect: "Sorry, better luck next time.",
 	endTime: "Out of time!",
-	finished: "Alright! Let's see how well you did."
+	finished: "Let's see how well you did."
 }
 
 $('#startBtn').on('click', function(){
@@ -97,7 +97,7 @@ function newQuestion(){
 	$('#gif').empty();
 	answered = true;
 	
-	//sets up new questions & answerList
+	
 	$('#currentQuestion').html('Question #'+(currentQuestion+1)+'/'+triviaQuestions.length);
 	$('.question').html('<h2>' + triviaQuestions[currentQuestion].question + '</h2>');
 	for(var i = 0; i < 4; i++){
@@ -108,7 +108,7 @@ function newQuestion(){
 		$('.answerList').append(choices);
 	}
 	countdown();
-	//clicking an answer will pause the time and setup answerPage
+	
 	$('.thisChoice').on('click',function(){
 		userSelect = $(this).data('index');
 		clearInterval(time);
@@ -117,10 +117,10 @@ function newQuestion(){
 }
 
 function countdown(){
-	seconds = 15;
+	seconds = 10;
 	$('#timeLeft').html('<h3>Time Remaining: ' + seconds + '</h3>');
 	answered = true;
-	//sets timer to go down
+
 	time = setInterval(showCountdown, 1000);
 }
 
@@ -136,13 +136,13 @@ function showCountdown(){
 
 function answerPage(){
 	$('#currentQuestion').empty();
-	$('.thisChoice').empty(); //Clears question page
+	$('.thisChoice').empty(); 
 	$('.question').empty();
 
 	var rightAnswerText = triviaQuestions[currentQuestion].answerList[triviaQuestions[currentQuestion].answer];
 	var rightAnswerIndex = triviaQuestions[currentQuestion].answer;
 	$('#gif').html('<img src = "assets/images/'+ gifArray[currentQuestion] +'.gif" width = "400px">');
-	//checks to see correct, incorrect, or unanswered
+	
 	if((userSelect == rightAnswerIndex) && (answered == true)){
 		correctAnswer++;
 		$('#message').html(messages.correct);
